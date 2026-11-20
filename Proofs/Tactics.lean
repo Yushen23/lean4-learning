@@ -1,5 +1,7 @@
 import Mathlib
 
+set_option linter.style.header false
+
 /-!
 # 基础策略
 
@@ -48,9 +50,9 @@ theorem tactic_constructor : (1 + 1 = 2) ∧ (2 + 2 = 4) := by
 -- cases：分类讨论（布尔值）
 theorem tactic_cases (b : Bool) : b = true ∨ b = false := by
   cases b
-  · left
-    rfl
   · right
+    rfl
+  · left
     rfl
 
 -- induction：数学归纳法

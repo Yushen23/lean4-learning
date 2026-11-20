@@ -1,5 +1,7 @@
 import Mathlib
 
+set_option linter.style.header false
+
 /-!
 # 经典定理证明
 
@@ -20,24 +22,24 @@ theorem sum_formula (n : Nat) : 2 * sumUpTo n = n * (n + 1) := by
   | zero => rfl
   | succ k ih =>
       -- 归纳步骤：假设对 k 成立，证明对 k+1 成立
-      rw [sumUpTo, ih]
-      ring
+      rw [sumUpTo]
+      nlinarith [ih]
 
 /- ## 奇偶性 -/
 
 -- 偶数的定义：存在 k 使得 n = 2*k
-def Even (n : Nat) : Prop := ∃ k : Nat, n = 2 * k
+def IsEven (n : Nat) : Prop := ∃ k : Nat, n = 2 * k
 
 -- 0 是偶数
-theorem zero_is_even : Even 0 := by
+theorem zero_is_even : IsEven 0 := by
   exact ⟨0, by simp⟩
 
 -- 2 是偶数
-theorem two_is_even : Even 2 := by
+theorem two_is_even : IsEven 2 := by
   exact ⟨1, by simp⟩
 
 -- 偶数加偶数是偶数
-theorem even_add_even {m n : Nat} (hm : Even m) (hn : Even n) : Even (m + n) := by
+theorem even_add_even {m n : Nat} (hm : IsEven m) (hn : IsEven n) : IsEven (m + n) := by
   rcases hm with ⟨a, ha⟩
   rcases hn with ⟨b, hb⟩
   use a + b
@@ -62,5 +64,5 @@ theorem one_divides_everything (n : Nat) : Divides 1 n := by
 /- ## 平方的非负性（整数） -/
 
 -- 任何整数的平方都非负
-theorem square_nonneg (x : Int) : x * x ≥ 0 := by
-  nlinarith [sq_nonneg (x : Int)]
+theorem square_nonneg (x : Int) : x ^ 2 ≥ 0 := by
+  exact sq_nonneg x

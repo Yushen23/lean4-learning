@@ -1,5 +1,7 @@
 import Mathlib
 
+set_option linter.style.header false
+
 /-!
 # 基本语法
 
@@ -28,32 +30,32 @@ def double (n : Nat) : Nat := n * 2
 
 #eval double 5
 
--- 定义「平方」函数（用函数组合）
-def square (n : Nat) : Nat := n * n
+-- 定义「平方」函数
+def mySquare (n : Nat) : Nat := n * n
 
-#eval square 7
+#eval mySquare 7
 
 -- 多个参数的函数
-def add (a b : Nat) : Nat := a + b
+def myAdd (a b : Nat) : Nat := a + b
 
-#eval add 3 4
+#eval myAdd 3 4
 
 /- ## 递归函数 -/
 
 -- 阶乘：n! = n * (n-1) * ... * 1
-def factorial : Nat → Nat
+def myFactorial : Nat → Nat
   | 0 => 1
-  | n + 1 => (n + 1) * factorial n
+  | n + 1 => (n + 1) * myFactorial n
 
-#eval factorial 5
+#eval myFactorial 5
 
 -- 斐波那契数列
-def fib : Nat → Nat
+def myFib : Nat → Nat
   | 0 => 0
   | 1 => 1
-  | n + 2 => fib n + fib (n + 1)
+  | n + 2 => myFib n + myFib (n + 1)
 
-#eval fib 10
+#eval myFib 10
 
 /- ## 模式匹配 -/
 
@@ -69,8 +71,8 @@ def describe (n : Nat) : String :=
 
 /- ## 条件表达式 -/
 
-def abs (n : Int) : Int :=
-  if n >= 0 then n else -n
+def myAbs (n : Int) : Int :=
+  if n >= (0 : Int) then n else -n
 
-#eval abs (-5)
-#eval abs 7
+#eval myAbs (-5)
+#eval myAbs 7
